@@ -6,6 +6,9 @@ import { AccountsComponent } from './accounts.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { InvoiceStatusComponent } from './invoice-status/invoice-status.component';
 
+import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -15,7 +18,7 @@ import { InvoiceStatusComponent } from './invoice-status/invoice-status.componen
   ],
   imports: [
     CommonModule,
-    AccountsRoutingModule
+    AccountsRoutingModule,FormsModule,NgbModule
   ]
 })
 export class AccountsModule { }

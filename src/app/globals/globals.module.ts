@@ -8,6 +8,7 @@ import { LocationsComponent } from './locations/locations.component';
 import { GlobalsComponent } from './globals.component';
 
 
+
 @NgModule({
   declarations: [
     GlobalsComponent,
@@ -17,7 +18,7 @@ import { GlobalsComponent } from './globals.component';
   ],
   imports: [
     CommonModule,
-    GlobalsRoutingModule
+    GlobalsRoutingModule,
   ]
 })
 export class GlobalsModule { }

@@ -9,6 +9,9 @@ import { BodyComponent } from './body/body.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SublevelMenuComponent } from './sidenav/sublevel-menu.component';
+import {HttpClientModule} from '@angular/common/http'
+import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -23,7 +26,7 @@ import { SublevelMenuComponent } from './sidenav/sublevel-menu.component';
   ],
   imports: [
     BrowserModule,BrowserAnimationsModule,
-    AppRoutingModule,HeaderModule,
+    AppRoutingModule,HeaderModule,HttpClientModule,FormsModule, NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

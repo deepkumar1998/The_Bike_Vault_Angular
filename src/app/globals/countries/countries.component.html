@@ -1,1 +1,22 @@
-<p>countries works!</p>
+<h1>Countries</h1>
+<button class="btn btn-primary">Add New</button>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Code</th>
+        <th>Capital</th>
+        <th>Nationality</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>     
+      <tr *ngFor="let country of countries">        
+        <td><span>{{country.id}}</span></td>
+        <td><span>{{country.code}}</span></td>
+        <td><span>{{country.capital}}</span></td>
+        <td><span>{{country.nationality}}</span></td>
+        <td><span>{{country.description}}</span></td>
+      </tr>
+    </tbody>
+  </table>
