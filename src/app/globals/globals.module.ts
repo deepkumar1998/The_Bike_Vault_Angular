@@ -6,6 +6,9 @@ import { CountriesComponent } from './countries/countries.component';
 import { StatesComponent } from './states/states.component';
 import { LocationsComponent } from './locations/locations.component';
 import { GlobalsComponent } from './globals.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -18,7 +21,7 @@ import { GlobalsComponent } from './globals.component';
   ],
   imports: [
     CommonModule,
-    GlobalsRoutingModule,
+    GlobalsRoutingModule,FormsModule,NgbModule,ReactiveFormsModule,HttpClientModule
   ]
 })
 export class GlobalsModule { }

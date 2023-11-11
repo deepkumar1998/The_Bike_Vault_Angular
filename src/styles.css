@@ -35,3 +35,11 @@ body {
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.fa{
+    margin-right: 0.5rem;
+}
+
+td button{
+    margin-right: 1rem;
+}
