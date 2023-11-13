@@ -52,18 +52,13 @@ export class CountriesComponent implements OnInit {
       });
   }
   open(content) {
-    this.modalService
-      .open(content, { ariaLabelledBy: 'modal-basic-title' })
-      .result.then(
-        (result) => {
-          this.closeResult = `Closed with: ${result}`;
-        },
-        (reason) => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        }
-      );
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
-
+  
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -75,9 +70,10 @@ export class CountriesComponent implements OnInit {
   }
   onSubmit(f: NgForm) {
     const url = 'http://127.0.0.1:8080/country/add';
-    this.httpClient.post(url, f.value).subscribe((result) => {
-      this.ngOnInit(); //reload the table
-    });
+    this.httpClient.post(url, f.value)
+      .subscribe((result) => {
+        this.ngOnInit(); //reload the table
+      });
     this.modalService.dismissAll(); //dismiss the modal
   }
 

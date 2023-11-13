@@ -1,4 +1,207 @@
-‹div class="col-3"›
-‹label for="">Select Site‹/label>
-‹select class="form-control" [ (ngModel)]="
-<option value="">Select </option>   
+<h1>States</h1>
+<div class="container">
+  <div >
+      <button class="btn btn-md btn-outline-primary" (click)="open(content)">
+        <i class="fa-solid fa-square-plus fa-xl"></i> Add States</button>
+    </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Capital</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let state of states">
+      <td><span>{{state.code}}</span></td>
+      <td><span>{{state.name}}</span></td>
+      <td><span>{{state.capital}}</span></td>
+      <td>
+          <button class="btn btn-sm btn-info" (click)="openDetails(contentDetails, state)">
+            <i class="fa fa-search"></i>Details</button>
+          <button class="btn btn-sm btn-warning"(click)="openEdit(contentEdit, state)">
+            <i class="fa fa-edit"></i>Edit</button>
+          <button class="btn btn-sm btn-danger"(click)="openDelete(contentDelete, state)">
+            <i class="fa fa-remove"></i>Delete</button>
+        </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+ <!-- Add Details Start -->
+ <ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New Country</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+      <div class="form-group">
+        <label for="code">Code</label>
+        <div class="input-group">
+          <input id="code" name="code" class="form-control" ngModel >
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <div class="input-group">
+          <input id="name" name="name" class="form-control" ngModel >
+        </div>
+      </div>
+      <div class="form-group">
+          <label for="capital">Capital</label>
+          <div class="input-group">
+            <input id="capital" name="capital" class="form-control"ngModel >
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="continent">Continent</label>
+          <div class="input-group">
+            <input id="continent" name="continent" class="form-control" ngModel>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="country">Country</label>
+          <select id="country" class="form-control" ngModel name="countryid" required>
+            <option value="" disabled selected>Select Country >></option>
+            <option *ngFor="let country of countries" [value]="country.id">{{ country.nationality }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="details">Details</label>
+          <div class="input-group">
+            <input id="details" name="details" class="form-control" ngModel >
+          </div>
+        </div>
+        <div class="text-end">
+          <button data-dismiss="modal" class="btn btn-info">Submit</button>
+          </div>
+    </form>
+  </div>
+</ng-template>
+<!-- Add Details End -->
+
+<!-- View Details Start -->
+<ng-template #contentDetails let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title2">Country Details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label>Code</label>
+        <div class="input-group">
+          <input id="cd" class="form-control" readonly >
+        </div>
+      </div>
+      <div class="form-group">
+          <label>Capital</label>
+          <div class="input-group">
+            <input id="cap" class="form-control" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Name</label>
+          <div class="input-group">
+            <input id="na" class="form-control" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Country</label>
+          <div class="input-group">
+            <input id="national" class="form-control" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Details</label>
+          <div class="input-group">
+            <input id="det" class="form-control" readonly>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+        </div>
+    </form>
+  </div>
+
+</ng-template>
+
+<!-- View Details End -->
+
+<!-- Edit Details Start -->
+<ng-template #contentEdit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title3">Edit State</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="editForm" novalidate>
+      <div class="form-group">
+        <label for="code">Code</label>
+        <div class="input-group">
+          <input formControlName="code" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <div class="input-group">
+          <input id="name" formControlName="name" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+          <label for="capital">Capital</label>
+          <div class="input-group">
+            <input formControlName="capital" class="form-control">
+          </div>
+        </div>       
+        <div class="form-group">
+          <label for="country">Country</label>
+          <select class="form-control" formControlName="countryid" required>
+            <option *ngFor="let country of countries" [value]="country.id">{{ country.nationality }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="details">Details</label>
+          <div class="input-group">
+            <input formControlName="details" class="form-control" >
+          </div>
+        </div>
+        <div class="border text-center"> 
+          <button data-dismiss="modal" class="btn btn-info"(click)="onSave()" >Save Changes</button>
+       </div>
+    </form>
+  </div>
+</ng-template>
+
+<!-- Edit Details End -->
+
+<!-- Delete Entry Start -->
+
+<ng-template #contentDelete let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Confirm Delete</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h2>Are you sure you want to delete this record.</h2>
+    <div class="border text-center"> 
+      <button data-dismiss="modal" class="btn btn-danger" (click)="onDelete()">Yes, Delete!</button> 
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+  </div>
+</ng-template>
+
+<!-- Delete Entry End -->

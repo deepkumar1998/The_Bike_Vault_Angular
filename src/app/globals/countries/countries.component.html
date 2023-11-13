@@ -2,28 +2,22 @@
 <div class="container">
     <div >
         <button class="btn btn-md btn-outline-primary" (click)="open(content)">
-          <i class="fa fa-user"></i>New Friend</button>
+          <i class="fa fa-user"></i>Add Country</button>
       </div>
     <table class="table table-striped">
       <thead>
       <tr>
-        <th>ID</th>
         <th>Code</th>
         <th>Capital</th>
-        <th>Continent</th>
         <th>Nationality</th>
-        <th>Description</th>
         <th>Actions</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let country of countries">
-        <td><span>{{country.id}}</span></td>
         <td><span>{{country.code}}</span></td>
         <td><span>{{country.capital}}</span></td>
-        <td><span>{{country.continent}}</span></td>
         <td><span>{{country.nationality}}</span></td>
-        <td><span>{{country.description}}</span></td>
         <td>
             <button class="btn btn-sm btn-info" (click)="openDetails(contentDetails, country)">
               <i class="fa fa-search"></i>Details</button>
@@ -49,31 +43,31 @@
         <div class="form-group">
           <label for="code">Code</label>
           <div class="input-group">
-            <input id="code" class="form-control" ngModel >
+            <input id="code" name="code" class="form-control" ngModel >
           </div>
         </div>
         <div class="form-group">
             <label for="capital">Capital</label>
             <div class="input-group">
-              <input id="capital" class="form-control"ngModel >
+              <input id="capital" name="capital" class="form-control"ngModel >
             </div>
           </div>
           <div class="form-group">
             <label for="continent">Continent</label>
             <div class="input-group">
-              <input id="continent" class="form-control" ngModel>
+              <input id="continent" name="continent" class="form-control" ngModel>
             </div>
           </div>
           <div class="form-group">
             <label for="nationality">Nationality</label>
             <div class="input-group">
-              <input id="nationality" class="form-control" ngModel >
+              <input id="nationality" name="nationality" class="form-control" ngModel >
             </div>
           </div>
           <div class="form-group">
             <label for="description">Description</label>
             <div class="input-group">
-              <input id="description" class="form-control" ngModel >
+              <input id="description" name="description" class="form-control" ngModel >
             </div>
           </div>
           <div class="text-end">
