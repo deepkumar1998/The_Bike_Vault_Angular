@@ -4,15 +4,25 @@ import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Country } from '../countries/countries.component';
 
+
+
 export class State {
   constructor(
-    public id: number,
-    public name: string,
-    public capital: string,
-    public country:Country,
-    public code: string,
-    public countryid: number,
-    public details: string
+  public id: number,
+  public name: string,
+  public capital: string,
+  public code: string,
+  public country: {
+     id: number,
+     code: string,
+     capital: string,
+     description: string,
+     nationality: string,
+     continent: string,
+     states: number[];
+  },
+  public countryid: number,
+  public details: string
   ) {}
 }
 
@@ -22,19 +32,21 @@ export class State {
   styleUrls: ['./states.component.css'],
 })
 export class StatesComponent implements OnInit {
-  states: State[];
+  states: State[] = [];
   countries: Country[]; // Add this for storing country data
   closeResult: string;
   editForm:FormGroup
   deleteId: number;
 
   constructor(
+
     private httpClient: HttpClient,
     private modalService: NgbModal,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
+    
     this.getCountries(); // Fetch countries data
     this.getStates();
     this.editForm = this.fb.group({
@@ -67,20 +79,25 @@ export class StatesComponent implements OnInit {
   }
 
   getStates() {
-    this.httpClient
-      .get<any>('http://127.0.0.1:8080/state/view')
-      .subscribe((response) => {
-        console.log(response);
-        this.states = response;
-      });
+    this.httpClient.get<any>('http://127.0.0.1:8080/state/view')
+  .subscribe((response) => {
+    console.log(response); // Display the response for reference
+
+    this.states = response.filter(item => typeof item === 'object');
+    console.log(this.states); // This should log only the array of objects
+  });
+
   }
+  
 
   getCountries() {
     this.httpClient
       .get<any>('http://127.0.0.1:8080/country/view')
       .subscribe((response) => {
-        console.log(response);
+        // console.log(response);
         this.countries = response;
+        console.log(this.countries);
+        
       });
   }
   onSubmit(f: NgForm) {
@@ -88,6 +105,8 @@ export class StatesComponent implements OnInit {
     this.httpClient.post(url, f.value)
       .subscribe((result) => {
         this.ngOnInit(); //reload the table
+        console.log("working");
+        
       });
     this.modalService.dismissAll(); //dismiss the modal
   }  
@@ -149,8 +168,5 @@ export class StatesComponent implements OnInit {
       this.modalService.dismissAll();
     });
   }
-  
-
-
-  
+   
 }

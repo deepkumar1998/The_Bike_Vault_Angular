@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { State } from '../states/states.component';
+
 
 
 export class Country {
@@ -11,7 +13,8 @@ export class Country {
     public capital: string,
     public description: string,
     public nationality: string,
-    public continent: string
+    public continent: string,
+    public state:State[]
   ) {}
 }
 @Component({
