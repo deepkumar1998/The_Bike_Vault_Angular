@@ -8,7 +8,8 @@
     position: fixed;
     bottom: 0;
     transition: all .5s ease;
-    background: #fff;
+    background-image: url("/assets/images/harley-davidson-hd.jpg");
+    background-size: cover;
     padding: 3rem;
 }
 

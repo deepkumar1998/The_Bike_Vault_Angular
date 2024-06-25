@@ -95,21 +95,21 @@ export const navbarData:INavbarData[]=[
             },
       
 ]},
-    {
-        routeLink:'accounts',
-        icon:'fal fa-dollar-sign',
-        label:'Accounts',
-        items: [
-            {
-                routeLink:'accounts/invoice',
-                label:'Invoice'
-            },
-            {
-                routeLink:'accounts/invoiceStatus',
-                label:'Invoice Status Value'
-            }
-    ]
-    },
+    // {
+    //     routeLink:'accounts',
+    //     icon:'fal fa-dollar-sign',
+    //     label:'Accounts',
+    //     items: [
+    //         {
+    //             routeLink:'accounts/invoice',
+    //             label:'Invoice'
+    //         },
+    //         {
+    //             routeLink:'accounts/invoiceStatus',
+    //             label:'Invoice Status Value'
+    //         }
+    // ]
+    // },
     {
         routeLink:'globals',
         icon:'fal fa-globe',
@@ -128,25 +128,25 @@ export const navbarData:INavbarData[]=[
                 label:'Locations'
             },
 ]},
-    {
-        routeLink:'reports',
-        icon:'fal fa-book',
-        label:'Reports',
-        items: [
-            {
-                routeLink:'reports/vehicleReports',
-                label:'Vehicle Reports'
-            },
-            {
-                routeLink:'reports/employeeReports',
-                label:'Employee Reports'
-            },
-            {
-                routeLink:'reports/accountsReports',
-                label:'Accounts Reports'
-            },
+//     {
+//         routeLink:'reports',
+//         icon:'fal fa-book',
+//         label:'Reports',
+//         items: [
+//             {
+//                 routeLink:'reports/vehicleReports',
+//                 label:'Vehicle Reports'
+//             },
+//             {
+//                 routeLink:'reports/employeeReports',
+//                 label:'Employee Reports'
+//             },
+//             {
+//                 routeLink:'reports/accountsReports',
+//                 label:'Accounts Reports'
+//             },
 
-]},
+// ]},
 
 
 

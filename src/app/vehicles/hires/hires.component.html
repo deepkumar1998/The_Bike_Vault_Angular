@@ -1,32 +1,164 @@
-<h1>Hires</h1>
-<button class="btn btn-primary">Add New</button>
+<h1>{{title}}</h1>
+<button class="btn btn-primary" (click)="open(content)">Add New</button>
 <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">id</th>
+        <th scope="col">Vehicle</th>
+        <th scope="col">Date Out</th>
+        <th scope="col">Date In</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td></td>
+      <tr *ngFor="let item of data">
+        <td><span>{{item.id}}</span></td>                
+        <td><span>{{item.vehicle.name}}</span></td>
+        <td><span>{{item.dateOut | date}}</span></td>
+        <td><span>{{item.dateIn | date}}</span></td>
+        <td>
+            
+            <button class="btn btn-sm btn-warning"(click)="openEdit(contentEdit, item)">
+              <i class="fa fa-edit"></i>Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="openDelete(contentDelete, item)">
+              <i class="fa fa-remove"></i>Delete</button>
+          </td>
       </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td></td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td></td>
-      </tr>
-    </tbody>
+      </tbody>
   </table>
+
+
+  
+  <!-- Add Details Start -->
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add Details</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="fg">
+        <div class="form-group">
+          <label for="vehicle">Vehicle</label>
+          <div class="input-group">
+            <select id="vehicle" formControlName="vehicleid" class="form-control">
+              <ng-container *ngFor="let vehicle of vehicles" >
+                <option [value]="vehicle.id">{{ vehicle.name }}</option>
+                content
+              </ng-container>
+              
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="client">Client</label>
+          <div class="input-group">
+            <select id="client" formControlName="clientid" class="form-control">
+              <option *ngFor="let client of clients" [value]="client.id">{{ client.name }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="dateOut">Date Out</label>
+          <div class="input-group">
+            <input id="dateOut" type="date" formControlName="dateOut" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="dateIn">Date In</label>
+          <div class="input-group">
+            <input id="dateIn" type="date" formControlName="dateIn" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="price">Price</label>
+          <div class="input-group">
+            <input id="price" type="text" formControlName="price" class="form-control">
+          </div>
+        </div>
+        <div class="text-end">
+          <button data-dismiss="modal" class="btn btn-info" (click)="onSubmit()">Submit</button>
+        </div>
+      </form>
+      
+    </div>
+  </ng-template>
+  <!-- Add Details End -->
+
+ 
+<!-- Edit Details Start -->
+<ng-template #contentEdit let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title3">Edit Country</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="fg">
+        <div class="form-group">
+          <label for="vehicle">Vehicle</label>
+          <div class="input-group">
+            <select id="vehicle" formControlName="vehicleid" class="form-control">
+              <option *ngFor="let vehicle of vehicles" [value]="vehicle.id">{{ vehicle.name }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="client">Client</label>
+          <div class="input-group">
+            <select id="client" formControlName="clientid" class="form-control">
+              <option *ngFor="let client of clients" [value]="client.id">{{ client.name }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="dateOut">Date Out</label>
+          <div class="input-group">
+            <input id="dateOut" type="date" formControlName="dateOut" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="dateIn">Date In</label>
+          <div class="input-group">
+            <input id="dateIn" type="date" formControlName="dateIn" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="price">Price</label>
+          <div class="input-group">
+            <input id="price" type="text" formControlName="price" class="form-control">
+          </div>
+        </div>
+        <div class="text-end">
+          <button data-dismiss="modal" class="btn btn-info" (click)="onSubmit()">Submit</button>
+        </div>
+      </form>
+      
+    </div>
+  </ng-template>
+
+<!-- Edit Details End -->
+
+<!-- Delete Entry Start -->
+
+<ng-template #contentDelete let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Confirm Delete</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h2>Are you sure you want to delete this record.</h2>
+    <div class="border text-center"> 
+      <button data-dismiss="modal" class="btn btn-danger" (click)="onDelete()">Yes, Delete!</button> 
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+  </div>
+</ng-template>
+
+<!-- Delete Entry End -->

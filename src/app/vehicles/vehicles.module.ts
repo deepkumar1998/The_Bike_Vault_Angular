@@ -6,6 +6,9 @@ import { VehiclesDataComponent } from './vehicles-data/vehicles-data.component';
 import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { MovementsComponent } from './movements/movements.component';
 import { HiresComponent } from './hires/hires.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -17,7 +20,7 @@ import { HiresComponent } from './hires/hires.component';
   ],
   imports: [
     CommonModule,
-    VehiclesRoutingModule
+    VehiclesRoutingModule,FormsModule,NgbModule,ReactiveFormsModule,HttpClientModule
   ]
 })
 export class VehiclesModule { }

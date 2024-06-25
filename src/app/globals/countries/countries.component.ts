@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { State } from '../states/states.component';
+import { CountryService } from './country.service';
 
 
 
@@ -25,13 +26,12 @@ export class Country {
 export class CountriesComponent implements OnInit {
   countries: Country[];
   closeResult: string;
-  country: Country;
   editForm: FormGroup;
   deleteId:number;
  
 
   constructor(
-    private httpClient: HttpClient,
+    private countryService:CountryService,
     private modalService: NgbModal,
     private fb: FormBuilder
   ) {}
@@ -47,12 +47,11 @@ export class CountriesComponent implements OnInit {
     });
   }
   getCountries() {
-    this.httpClient
-      .get<any>('http://127.0.0.1:8080/country/view')
-      .subscribe((response) => {
-        console.log(response);
-        this.countries = response;
-      });
+    this.countryService.getAll().subscribe(
+      (response)=>{
+        this.countries=response;
+      }
+    )
   }
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -72,8 +71,7 @@ export class CountriesComponent implements OnInit {
     }
   }
   onSubmit(f: NgForm) {
-    const url = 'http://127.0.0.1:8080/country/add';
-    this.httpClient.post(url, f.value)
+   this.countryService.add(f)
       .subscribe((result) => {
         this.ngOnInit(); //reload the table
       });
@@ -111,9 +109,8 @@ export class CountriesComponent implements OnInit {
     });
   }
   onSave() {
-    const editURL = `http://127.0.0.1:8080/country/update/${this.editForm.value.id}` ;
-    console.log(this.editForm.value);
-    this.httpClient.put(editURL, this.editForm.value)
+   
+    this.countryService.update(this.editForm.value.id, this.editForm)
       .subscribe((results) => {
         this.ngOnInit();
         this.modalService.dismissAll();
@@ -127,10 +124,8 @@ export class CountriesComponent implements OnInit {
     });
   }
 
-  onDelete() {
-    const deleteURL = 'http://127.0.0.1:8080/country/delete/' + this.deleteId;
-  
-    this.httpClient.delete(deleteURL)
+  onDelete() {  
+    this.countryService.delete(this.deleteId)
     .subscribe((results) => {
       this.ngOnInit();
       this.modalService.dismissAll();
