@@ -92,6 +92,7 @@ export class HiresComponent {
       .subscribe((result) => {
         this.ngOnInit(); //reload the table
       });
+      this.fg.reset();
     this.modalService.dismissAll(); //dismiss the modal
   }
 
@@ -99,14 +100,15 @@ export class HiresComponent {
     this.modalService.open(targetModal, {
       centered: true,
       backdrop: 'static',
-      size: 'lg',
+      size: 'md',
     });
     this.fg.patchValue({
       vehicleid:data.vehicleid,
       clientid:data.client.id,
-      dateOut:data.dateOut,
-      date:data.dateIn,
-      price:data.price
+      dateOut:this.convertToDateOnly(data.dateOut),
+      dateIn:this.convertToDateOnly(data.dateIn),
+      price:data.price,
+      remarks:data.remarks
       
     });
     this.editId=data.id;
@@ -118,6 +120,7 @@ export class HiresComponent {
         this.ngOnInit();
         this.modalService.dismissAll();
       });
+      this.fg.reset();
   }
   openDelete(targetModal, data:any) {
     this.deleteId = data.id;
@@ -134,4 +137,7 @@ onDelete() {
   });
 }
 
+convertToDateOnly(isoDate: string): string {
+  return isoDate.split('T')[0];
+}
 }

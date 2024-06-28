@@ -1,6 +1,6 @@
 import { INavbarData } from "./helper";
 
-export const navbarData:INavbarData[]=[
+export const adminData:INavbarData[]=[
     {
         routeLink:'dashboard',
         icon:'fal fa-home',
@@ -20,10 +20,10 @@ export const navbarData:INavbarData[]=[
                 routeLink:'vehicles/maintenance',
                 label:'Maintenance'
             },
-            {
-                routeLink:'vehicles/movements',
-                label:'Movements'
-            },
+            // {
+            //     routeLink:'vehicles/movements',
+            //     label:'Movements'
+            // },
             {
                 routeLink:'vehicles/hires',
                 label:'Hires'
@@ -70,14 +70,14 @@ export const navbarData:INavbarData[]=[
                 routeLink:'people/suppliers',
                 label:'Suppliers'
             },
-            {
-                routeLink:'people/contacts',
-                label:'Contacts'
-            },
-            {
-                routeLink:'people/users',
-                label:'Users'
-            },
+            // {
+            //     routeLink:'people/contacts',
+            //     label:'Contacts'
+            // },
+            // {
+            //     routeLink:'people/users',
+            //     label:'Users'
+            // },
        
 ]},
     {
@@ -150,4 +150,55 @@ export const navbarData:INavbarData[]=[
 
 
 
+];
+
+
+
+export const userData:INavbarData[]=[
+    {
+        routeLink:'vehicles',
+        icon:'fal fa-motorcycle',
+        label:'Vehicles',
+        items: [
+            {
+                routeLink:'vehicles/data',
+                label:'Vehicle Data'
+            },
+            {
+                routeLink:'vehicles/maintenance',
+                label:'Maintenance'
+            },
+            // {
+            //     routeLink:'vehicles/movements',
+            //     label:'Movements'
+            // },
+            {
+                routeLink:'vehicles/hires',
+                label:'Hires'
+            }
+
+]},
+
+    {
+        routeLink:'parameters',
+        icon:'fal fa-gears',
+        label:'Parameters',
+        items: [
+            {
+                routeLink:'parameters/vehicleMakes',
+                label:'Vehicle Makes'
+            },
+            {
+                routeLink:'parameters/vehicleModels',
+                label:'Vehicle Models'
+            },
+            {
+                routeLink:'parameters/vehicleTypes',
+                label:'Vehicle Types'
+            },
+            {
+                routeLink:'parameters/status',
+                label:'Status Values'
+            },       
+]},
 ];

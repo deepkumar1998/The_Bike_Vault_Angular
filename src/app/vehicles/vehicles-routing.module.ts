@@ -15,10 +15,10 @@ const routes: Routes = [
     path:'maintenance',
     component:MaintenanceComponent
   },
-  {
-    path:'movements',
-    component:MovementsComponent
-  },
+  // {
+  //   path:'movements',
+  //   component:MovementsComponent
+  // },
   {
     path:'hires',
     component:HiresComponent

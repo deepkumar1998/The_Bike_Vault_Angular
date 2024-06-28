@@ -1,32 +1,285 @@
-<h1>Vehicle Data</h1>
-<button class="btn btn-primary">Add New</button>
+<h1>{{title}}</h1>
+<button class="btn btn-primary" (click)="open(content)">Add New</button>
+<div class="table-container ">
 <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col" >id</th>
+        <th scope="col" >Name</th>
+        <th scope="col" >Description</th>
+        <th scope="col" >Acquisition Date</th>
+        <th scope="col" >Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td></td>
+      @for (item of data; track $index) {
+      <tr >
+        <td><span>{{item.id}}</span></td>       
+          <td >{{item.name}}</td>
+      
+      <td >{{item.description}}</td>
+      <td >{{item.acquisitionDate |date}}</td>
+        <td>
+            
+            <button class="btn btn-sm btn-warning"(click)="openEdit(contentEdit, item)">
+              <i class="fa fa-edit"></i>Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="openDelete(contentDelete, item)">
+              <i class="fa fa-remove"></i>Delete</button>
+          </td>
       </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td></td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td></td>
-      </tr>
-    </tbody>
+    }
+      </tbody>
   </table>
+</div>
+
+  
+  <!-- Add Details Start -->
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add Details</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="fg" >
+        <div class="form-group">
+          <label for="vehicle">Vehicle</label>
+          <select id="vehicle" formControlName="vehicletypeid" class="form-control">
+            @for (item of vehicletype; track $index) {
+            <option [value]="item.id">{{ item.description }}</option>
+            }
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="name">Vehicle Name</label>
+          <div class="input-group">
+            <input  formControlName="name" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="vehicleNumber">Vehicle Number</label>
+          <div class="input-group">
+            <input  formControlName="vehicleNumber" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Registration Date</label>
+          <div class="input-group">
+            <input type="date"  formControlName="registrationDate" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <div class="input-group">
+            <input  formControlName="description" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label >Acquisition Date</label>
+          <div class="input-group">
+            <input type="date" formControlName="acquisitionDate" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Vehicle Make</label>
+          <select id="vehicle" formControlName="vehiclemakeid" class="form-control">
+            @for (item of vehiclemake; track $index) {
+            <option [value]="item.id">{{ item.description }}</option>
+            }
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Vehicle Model</label>
+          <select id="vehicle" formControlName="vehiclemodelid" class="form-control">
+            @for (item of vehiclemodel; track $index) {
+            <option [value]="item.id">{{ item.description }}</option>
+            }
+          </select>
+        </div>
+        <div class="form-group">
+          <label >Power</label>
+          <div class="input-group">
+            <input  formControlName="power" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label >Fuel Capacity</label>
+          <div class="input-group">
+            <input  formControlName="fuelCapacity" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label >Net Weight</label>
+          <div class="input-group">
+            <input  formControlName="netWeight" class="form-control">
+          </div>
+        </div>        
+        
+        <div class="form-group">
+          <label for="remarks">Remarks</label>
+          <div class="input-group">
+            <input id="remarks" formControlName="remarks" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>In Charge</label>
+          <select id="vehicle" formControlName="employeeid" class="form-control">
+            @for (item of employees; track $index) {
+            <option [value]="item.id">{{ item.name }}</option>
+            }
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Current Status</label>
+          <select id="vehicle" formControlName="vehiclestatusid" class="form-control">
+            @for (item of vehiclestatus; track $index) {
+            <option [value]="item.id">{{ item.description }}</option>
+            }
+          </select>
+        </div>
+            <div class="border text-center"> 
+                <button data-dismiss="modal" class="btn btn-info"(click)="onSubmit()" >Save Changes</button>
+             </div>
+          </form>
+    </div>
+  </ng-template>
+  
+  <!-- Add Details End -->
+
+ 
+<!-- Edit Details Start -->
+<ng-template #contentEdit let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title3">Edit Details</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="fg" >
+        <div class="form-group">
+          <label for="vehicle">Vehicle</label>
+          <select id="vehicle" formControlName="vehicletypeid" class="form-control">
+            @for (item of vehicletype; track $index) {
+            <option [value]="item.id">{{ item.description }}</option>
+            }
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="name">Vehicle Name</label>
+          <div class="input-group">
+            <input  formControlName="name" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="vehicleNumber">Vehicle Number</label>
+          <div class="input-group">
+            <input  formControlName="vehicleNumber" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Registration Date</label>
+          <div class="input-group">
+            <input type="date"  formControlName="registrationDate" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <div class="input-group">
+            <input  formControlName="description" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label >Acquisition Date</label>
+          <div class="input-group">
+            <input type="date" formControlName="acquisitionDate" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Vehicle Make</label>
+          <select id="vehicle" formControlName="vehiclemakeid" class="form-control">
+            @for (item of vehiclemake; track $index) {
+            <option [value]="item.id">{{ item.description }}</option>
+            }
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Vehicle Model</label>
+          <select id="vehicle" formControlName="vehiclemodelid" class="form-control">
+            @for (item of vehiclemodel; track $index) {
+            <option [value]="item.id">{{ item.description }}</option>
+            }
+          </select>
+        </div>
+        <div class="form-group">
+          <label >Power</label>
+          <div class="input-group">
+            <input  formControlName="power" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label >Fuel Capacity</label>
+          <div class="input-group">
+            <input  formControlName="fuelCapacity" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label >Net Weight</label>
+          <div class="input-group">
+            <input  formControlName="netWeight" class="form-control">
+          </div>
+        </div>        
+        
+        <div class="form-group">
+          <label for="remarks">Remarks</label>
+          <div class="input-group">
+            <input id="remarks" formControlName="remarks" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>In Charge</label>
+          <select id="vehicle" formControlName="employeeid" class="form-control">
+            @for (item of employees; track $index) {
+            <option [value]="item.id">{{ item.name }}</option>
+            }
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Current Status</label>
+          <select id="vehicle" formControlName="vehiclestatusid" class="form-control">
+            @for (item of vehiclestatus; track $index) {
+            <option [value]="item.id">{{ item.description }}</option>
+            }
+          </select>
+        </div>
+            <div class="border text-center"> 
+                <button data-dismiss="modal" class="btn btn-info"(click)="onSave()" >Save Changes</button>
+             </div>
+          </form>
+    </div>
+  </ng-template>
+
+<!-- Edit Details End -->
+
+<!-- Delete Entry Start -->
+
+<ng-template #contentDelete let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Confirm Delete</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h2>Are you sure you want to delete this record.</h2>
+    <div class="border text-center"> 
+      <button data-dismiss="modal" class="btn btn-danger" (click)="onDelete()">Yes, Delete!</button> 
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+  </div>
+</ng-template>
+
+<!-- Delete Entry End -->

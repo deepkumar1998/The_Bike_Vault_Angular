@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HrSettingsRoutingModule } from './hr-settings-routing.module';
 import { JobTitlesComponent } from './job-titles/job-titles.component';
 import { EmployeeTypeComponent } from './employee-type/employee-type.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { EmployeeTypeComponent } from './employee-type/employee-type.component';
   ],
   imports: [
     CommonModule,
-    HrSettingsRoutingModule
+    HrSettingsRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class HrSettingsModule { }

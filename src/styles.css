@@ -43,3 +43,31 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 td button{
     margin-right: 1rem;
 }
+
+h1{
+    color: #e6edef;
+    text-align: center;
+}
+
+
+.table-container {
+    max-height: 400px; /* Set the desired height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
+  }
+  
+  .table-container table {
+    width: 100%; /* Ensures the table takes full width of the container */
+    border-collapse: collapse; /* Optional: improves table appearance */
+  }
+  
+  .table-container th,
+  .table-container td {
+    white-space: nowrap; /* Optional: Prevents text from wrapping in cells */
+    padding: 8px; /* Adds padding to table cells */
+  }
+
+  .table-container thead{
+    position: sticky;
+    top: 0;
+  }

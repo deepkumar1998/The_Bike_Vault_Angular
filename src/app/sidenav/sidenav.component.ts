@@ -1,7 +1,8 @@
-import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
-import { navbarData } from './nav-data';
+import { Component, EventEmitter, HostListener, OnInit, Output, inject } from '@angular/core';
+import { adminData, userData } from './nav-data';
 import { INavbarData, fadeInOut } from './helper';
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
+import { AuthService } from '../auth/auth.service';
 interface SideNavToggle{
   screenWidth: number;
   collapsed: boolean;
@@ -28,8 +29,11 @@ export class SidenavComponent implements OnInit {
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
   collapsed=false;
   screenWidth=0;
-  navData=navbarData;
+  navData:any;
   multiple:boolean=false;
+  constructor(private authService:AuthService){
+
+  }
 
   @HostListener('window:resize',['$event'])
   onResize(event:any){
@@ -39,9 +43,16 @@ export class SidenavComponent implements OnInit {
       this.onToggleSideNav.emit({collapsed: this.collapsed,screenWidth:this.screenWidth});
     }
   }
+  
 
   ngOnInit():void{
     this.screenWidth=window.innerWidth;
+    if (this.authService.getUserRole()=="ADMIN") {
+      this.navData=adminData;
+    }
+    else if(this.authService.getUserRole()=="USER"){
+      this.navData=userData;
+    }
   }
 
   toogleCollapse():void{

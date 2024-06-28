@@ -9,9 +9,12 @@ import { BodyComponent } from './body/body.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SublevelMenuComponent } from './sidenav/sublevel-menu.component';
-import {HttpClientModule} from '@angular/common/http'
-import { FormsModule } from '@angular/forms';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthInterceptor } from './auth/auth.interceptor';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 
@@ -23,12 +26,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SidenavComponent,
     DashboardComponent,
     SublevelMenuComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,BrowserAnimationsModule,
-    AppRoutingModule,HeaderModule,HttpClientModule,FormsModule, NgbModule
+    AppRoutingModule,HeaderModule,HttpClientModule,FormsModule, NgbModule,ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

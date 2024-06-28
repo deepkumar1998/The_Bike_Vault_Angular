@@ -1,21 +1,25 @@
 <h1>{{title}}</h1>
 <button class="btn btn-primary" (click)="open(content)">Add New</button>
+<div class="table-container ">
 <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">id</th>
-        <th scope="col">Vehicle</th>
-        <th scope="col">Date Out</th>
-        <th scope="col">Date In</th>
-        <th scope="col">Action</th>
+        <th scope="col" >id</th>
+        <th scope="col" >Vehicle</th>
+        <th scope="col" >Date Out</th>
+        <th scope="col" >Date In</th>
+        <th scope="col" >Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of data">
-        <td><span>{{item.id}}</span></td>                
-        <td><span>{{item.vehicle.name}}</span></td>
-        <td><span>{{item.dateOut | date}}</span></td>
-        <td><span>{{item.dateIn | date}}</span></td>
+      @for (item of data; track $index) {
+      <tr >
+        <td><span>{{item.id}}</span></td>
+        @if (item.vehicle !=null) {
+          <td >{{item.vehicle.name}}</td>
+      }
+      <td >{{item.dateOut | date}}</td>
+      <td >{{item.dateIn |date}}</td>
         <td>
             
             <button class="btn btn-sm btn-warning"(click)="openEdit(contentEdit, item)">
@@ -24,9 +28,10 @@
               <i class="fa fa-remove"></i>Delete</button>
           </td>
       </tr>
+    }
       </tbody>
   </table>
-
+</div>
 
   
   <!-- Add Details Start -->
@@ -38,104 +43,114 @@
       </button>
     </div>
     <div class="modal-body">
-      <form [formGroup]="fg">
+      <form [formGroup]="fg" >
         <div class="form-group">
           <label for="vehicle">Vehicle</label>
-          <div class="input-group">
-            <select id="vehicle" formControlName="vehicleid" class="form-control">
-              <ng-container *ngFor="let vehicle of vehicles" >
-                <option [value]="vehicle.id">{{ vehicle.name }}</option>
-                content
-              </ng-container>
-              
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="client">Client</label>
-          <div class="input-group">
-            <select id="client" formControlName="clientid" class="form-control">
-              <option *ngFor="let client of clients" [value]="client.id">{{ client.name }}</option>
-            </select>
-          </div>
+          <select id="vehicle" formControlName="vehicleid" class="form-control">
+            @for (vehicle of vehicles; track $index) {
+            <option [value]="vehicle.id">{{ vehicle.name }}</option>
+            }
+          </select>
         </div>
         <div class="form-group">
           <label for="dateOut">Date Out</label>
           <div class="input-group">
-            <input id="dateOut" type="date" formControlName="dateOut" class="form-control">
+            <input type="date" id="dateOut" formControlName="dateOut" class="form-control">
           </div>
         </div>
         <div class="form-group">
           <label for="dateIn">Date In</label>
           <div class="input-group">
-            <input id="dateIn" type="date" formControlName="dateIn" class="form-control">
+            <input type="date" id="dateIn" formControlName="dateIn" class="form-control">
           </div>
+        </div>
+        <div class="form-group">
+          <label for="client">Client</label>
+          <select id="client" formControlName="clientid" class="form-control">
+            @for (client of clients; track $index) {
+            <option [value]="client.id">{{ client.name }}</option>
+            }
+          </select>
         </div>
         <div class="form-group">
           <label for="price">Price</label>
           <div class="input-group">
-            <input id="price" type="text" formControlName="price" class="form-control">
+            <input id="price" formControlName="price" class="form-control">
           </div>
         </div>
+        <div class="form-group">
+          <label for="remarks">Remarks</label>
+          <div class="input-group">
+            <input id="remarks" formControlName="remarks" class="form-control">
+          </div>
+        </div>      
+             
         <div class="text-end">
-          <button data-dismiss="modal" class="btn btn-info" (click)="onSubmit()">Submit</button>
+          <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">Cancel</button>
+          <button type="submit" class="btn btn-info" (click)="onSubmit()">Submit</button>
         </div>
       </form>
-      
     </div>
   </ng-template>
+  
   <!-- Add Details End -->
 
  
 <!-- Edit Details Start -->
 <ng-template #contentEdit let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title3">Edit Country</h4>
+      <h4 class="modal-title" id="modal-basic-title3">Edit Details</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-      <form [formGroup]="fg">
+      <form [formGroup]="fg" >
         <div class="form-group">
           <label for="vehicle">Vehicle</label>
-          <div class="input-group">
-            <select id="vehicle" formControlName="vehicleid" class="form-control">
-              <option *ngFor="let vehicle of vehicles" [value]="vehicle.id">{{ vehicle.name }}</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="client">Client</label>
-          <div class="input-group">
-            <select id="client" formControlName="clientid" class="form-control">
-              <option *ngFor="let client of clients" [value]="client.id">{{ client.name }}</option>
-            </select>
-          </div>
+          <select id="vehicle" formControlName="vehicleid" class="form-control">
+            @for (vehicle of vehicles; track $index) {
+            <option [value]="vehicle.id">{{ vehicle.name }}</option>
+            }
+          </select>
         </div>
         <div class="form-group">
           <label for="dateOut">Date Out</label>
           <div class="input-group">
-            <input id="dateOut" type="date" formControlName="dateOut" class="form-control">
+            <input type="date" id="dateOut" formControlName="dateOut" class="form-control">
           </div>
         </div>
         <div class="form-group">
           <label for="dateIn">Date In</label>
           <div class="input-group">
-            <input id="dateIn" type="date" formControlName="dateIn" class="form-control">
+            <input type="date" id="dateIn" formControlName="dateIn" class="form-control">
           </div>
+        </div>
+        <div class="form-group">
+          <label for="client">Client</label>
+          <select id="client" formControlName="clientid" class="form-control">
+            @for (client of clients; track $index) {
+            <option [value]="client.id">{{ client.name }}</option>
+            }
+          </select>
         </div>
         <div class="form-group">
           <label for="price">Price</label>
           <div class="input-group">
-            <input id="price" type="text" formControlName="price" class="form-control">
+            <input id="price" formControlName="price" class="form-control">
           </div>
         </div>
-        <div class="text-end">
-          <button data-dismiss="modal" class="btn btn-info" (click)="onSubmit()">Submit</button>
+        <div class="form-group">
+          <label for="remarks">Remarks</label>
+          <div class="input-group">
+            <input id="remarks" formControlName="remarks" class="form-control">
+          </div>
         </div>
-      </form>
-      
+            
+            <div class="border text-center"> 
+                <button data-dismiss="modal" class="btn btn-info"(click)="onSave()" >Save Changes</button>
+             </div>
+          </form>
     </div>
   </ng-template>
 

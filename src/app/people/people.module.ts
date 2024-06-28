@@ -7,6 +7,8 @@ import { ClientComponent } from './client/client.component';
 import { SuppliersComponent } from './suppliers/suppliers.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { UsersComponent } from './users/users.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -19,7 +21,7 @@ import { UsersComponent } from './users/users.component';
   ],
   imports: [
     CommonModule,
-    PeopleRoutingModule
+    PeopleRoutingModule,ReactiveFormsModule,HttpClientModule
   ]
 })
 export class PeopleModule { }
